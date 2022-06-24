@@ -1,0 +1,56 @@
+# ByTitle
+
+import Tabs from '@theme/Tabs' import TabItem from '@theme/TabItem'
+
+> getByTitle, queryByTitle, getAllByTitle, queryAllByTitle, findByTitle, findAllByTitle
+
+### API
+
+```typescript
+getByTitle(
+  // If you're using `screen`, then skip the container argument:
+  container: HTMLElement,
+  title: TextMatch,
+  options?: {
+    exact?: boolean = true,
+    normalizer?: NormalizerFn,
+  }): HTMLElement
+```
+
+Returns the element that has the matching `title` attribute.
+
+Will also find a `title` element within an SVG.
+
+```html
+<span title="Delete" id="2"></span>
+<svg>
+  <title>Close</title>
+  <g><path /></g>
+</svg>
+```
+
+\<Tabs defaultValue="native" values={\[ { label: 'Native', value: 'native', }, { label: 'React', value: 'react', }, { label: 'Cypress', value: 'cypress', }, ] }>
+
+```js
+import { screen } from "@testing-library/dom";
+
+const deleteElement = screen.getByTitle("Delete");
+const closeElement = screen.getByTitle("Close");
+```
+
+```jsx
+import { render, screen } from "@testing-library/react";
+
+render(<MyComponent />);
+const deleteElement = screen.getByTitle("Delete");
+const closeElement = screen.getByTitle("Close");
+```
+
+```js
+cy.findByTitle("Delete").should("exist");
+cy.findByTitle("Close").should("exist");
+```
+
+### Options
+
+TextMatch options
